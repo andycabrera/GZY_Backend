@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose/dist/common/mongoose.decorators';
 import { Model } from 'mongoose';
 import { Users } from './users.interface';
@@ -10,13 +10,22 @@ export class UserService {
         private readonly usersModel: Model<Users>
     ){}
 
-    async createUser(body) : Promise<Users>{
-        return await this.usersModel.create(body)
+    async createUser(body: Users) : Promise<Users>{
+        try {
+           const user = await this.usersModel.create(body)
+           return user
+        } catch (error) {
+            console.log(error)
+            throw new BadRequestException(error)
+        }
     }
 
-    async getUser(id) : Promise<String>{
-        return await "Hola"
-        // return await this.usersModel.find({_id: id});
+    async getUser(id: string) : Promise<any>{
+        
+        const user= await this.usersModel.findById(id)
+
+        console.log(user)
+        return user
     }
 
     

@@ -11,7 +11,7 @@ export const UserSchema = new mongoose.Schema({
         trim: true,
         required: [true, 'El nombre es obligatorio']
     },
-    apellido: String,
+    lastName: String,
     mail: {
         type: String, 
         trim: true,
@@ -25,7 +25,13 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'El password es obligatorio']
     },
-    dateCreate: Date,
-    dateUpdate: Date
+    dateCreate: {
+        type: Date,
+        default: new Date()
+    },
+    dateUpdate: {
+        type: Date,
+        default: null
+    }
  })
 

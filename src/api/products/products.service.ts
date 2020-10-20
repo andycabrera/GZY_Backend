@@ -15,8 +15,8 @@ export class ProductService {
     return await this.productsModel.create(body)
   }
 
-  async getProduct(id): Promise<string> {
+  async getProduct(id): Promise<any> {
     // TODO: buscar por id en la base
-    return 'Hello World!';
+    return await this.productsModel.findById(id)
   }
 }

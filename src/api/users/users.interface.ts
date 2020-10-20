@@ -2,7 +2,7 @@ import {Document} from 'mongoose';
 
 export interface Users extends Document{
     name: String,
-    apellido: String,
+    lastName: String,
     mail: String,
     password: String,
     dateCreate: Date,
