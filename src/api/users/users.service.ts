@@ -21,7 +21,7 @@ export class UserService {
     }
 
     async getUser(id: string) : Promise<any>{
-        
+        console.log('hola')
         const user= await this.usersModel.findById(id)
 
         console.log(user)
