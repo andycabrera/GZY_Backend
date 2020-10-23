@@ -7,15 +7,18 @@ import { Purchase } from './purchase.interface'
 export class PurchaseService{
     constructor(
         @InjectModel('Purchase')
-        private readonly userModel: Model<Purchase>
+        private readonly purchaseModel: Model<Purchase>
     ){}
 
     async createPurchase(body): Promise<Purchase>{
-        return await this.userModel.create(body)
+        return await this.purchaseModel.create(body)
     }
 
-    async getPurchase(id): Promise<String>{
-        return await "Hola"
-        // return await this.userModel.find({_id: id})
+    async getPurchases(): Promise<Purchase[]>{
+        return await this.purchaseModel.find({}).populate('idUser').populate('products.product')
+    }
+
+    async getPurchase(id): Promise<any>{
+        return await this.purchaseModel.find({_id: id}).populate('users')
     }
 }

@@ -1,15 +1,22 @@
 import { Document } from 'mongoose'
 
+
+interface Product{
+    idProd: String,
+    quantity: Number
+}
+
+interface Address{
+    address: String,
+    city: String,
+    postalCode: Number
+}
+
 export interface Purchase extends Document{
-    idProducts: [{idProd: Number}],
-    quantityProducts: [{idProd: Number, quantity: Number}],
-    idUser: Number,
+    products: Product[],
+    idUser: String,
     price: Number,
-    address: {
-        address: String,
-        city: String,
-        postalCode: Number
-    },
+    address: Address,
     status: Boolean,
     dateCreate: Date,
     dateUpdate: Date

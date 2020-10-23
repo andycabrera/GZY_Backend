@@ -11,6 +11,11 @@ export class PurchaseController{
     }
 
     @Get()
+    async getAll() : Promise<any> {
+        return await this.purchaseService.getPurchases();
+    }
+
+    @Get('/:id')
     async getPurchase(@Param('id') id): Promise<any>{
         return await this.purchaseService.getPurchase(id)
     }

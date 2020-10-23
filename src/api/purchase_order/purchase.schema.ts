@@ -1,9 +1,20 @@
 import *as mongoose from 'mongoose'
 
 export const PurchaseSchema = new mongoose.Schema({
-    idProducts: [{idProd: Number}],
-    quantityProducts: [{idProd: Number, quantity: Number}],
-    idUser: Number,
+    products: [
+        {
+            product: 
+            {
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: 'Products'
+            },
+            quantity: Number
+        }
+    ],
+    idUser: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Users'
+    },
     price: Number,
     address: {
         address: String,
@@ -11,6 +22,12 @@ export const PurchaseSchema = new mongoose.Schema({
         postalCode: Number
     },
     status: Boolean,
-    dateCreate: Date,
-    dateUpdate: Date
+    dateCreate: {
+        type: Date,
+        default: new Date()
+    },
+    dateUpdate: {
+        type: Date,
+        default: null
+    }
 })
