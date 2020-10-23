@@ -28,5 +28,13 @@ export class UserService {
         return user
     }
 
+    async getUsers() : Promise<Users[]> {
+        return await this.usersModel.find({})
+    }
+
+    async updateUser(body: Users) : Promise<Users> {
+        return await this.usersModel.findByIdAndUpdate(body.id, body)
+    }
+
     
 }
