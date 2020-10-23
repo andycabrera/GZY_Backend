@@ -1,13 +1,14 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { get } from 'http';
 import { UserService } from './users.service';
+import { Users } from './users.interface'
 
 @Controller('/users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async newUser(@Body() body ): Promise<any> {
+  async newUser(@Body() body: Users ): Promise<any> {
     return await this.userService.createUser(body);
   }
 
@@ -21,8 +22,8 @@ export class UserController {
     return await this.userService.getUsers();
   }
 
-  @Put()
-  async updateUser(@Body() body) : Promise<any> {
-    return await this.userService.updateUser(body);
+  @Put('/:id')
+  async updateUser(@Body() body: Users, @Param('id') id) : Promise<any> {
+    return await this.userService.updateUser(body, id);
   }
 }

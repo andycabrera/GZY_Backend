@@ -32,8 +32,8 @@ export class UserService {
         return await this.usersModel.find({})
     }
 
-    async updateUser(body: Users) : Promise<Users> {
-        return await this.usersModel.findByIdAndUpdate(body.id, body)
+    async updateUser(body: Users, id: String) : Promise<Users> {
+        return await this.usersModel.findByIdAndUpdate(id, body)
     }
 
     
