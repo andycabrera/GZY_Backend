@@ -4,11 +4,24 @@ export const ProductsSchema = new mongoose.Schema({
   name: String,
   type: String,
   detail:String,
-  opciones: [
+  options: [
     {
       color: String,
-      talle: String,
+      size: String,
       base64: String
     }
-  ]
+  ],
+  price: Number,
+  status: {
+    type: Boolean,
+    default: 1
+  },
+  dateCreate: {
+    type: Date,
+    default: new Date()
+  },
+  dateUpdate: {
+      type: Date,
+      default: null
+  }
 })

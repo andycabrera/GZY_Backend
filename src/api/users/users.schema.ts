@@ -25,6 +25,10 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'El password es obligatorio']
     },
+    status: {
+        type: Boolean,
+        default: true,
+    },
     dateCreate: {
         type: Date,
         default: new Date()
