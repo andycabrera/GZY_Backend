@@ -25,4 +25,20 @@ export class ProductService {
   async updateProduct(body: Products): Promise<Products>{
     return await this.productsModel.findByIdAndUpdate(body.id, body);
   }
+
+  async deleteProduct(id : String) : Promise<Products> {
+    return await this.productsModel.findByIdAndUpdate(id, { status : false}, function(err, res){
+      return res
+    })
+  }
+
+  async updateStock(id: String, quantity: Number): Promise<any> {
+    // return await this.productsModel.findOne({_id:id}, function(err, res){
+    //   // var stock = res.stock + quantity
+    //   var stock = 5;
+    //   return this.productsModel.findByIdAndUpdate(id, {stock: stock})
+    // })
+
+    return await this.productsModel.findByIdAndUpdate(id, {stock: quantity})
+  }
 }

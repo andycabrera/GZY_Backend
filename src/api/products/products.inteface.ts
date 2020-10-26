@@ -1,17 +1,14 @@
 import { Document } from 'mongoose'
 
-interface Options {
-    color: String,
-    size: String,
-    base64: String
-}
-
 export interface Products extends Document{
     name: String,
     type: String,
     detail:String,
-    options: Options[],
+    color: String,
+    size: String,
+    base64: String
     price :Number,
+    stock: Number,
     status: Boolean,
     dateCreate: Date,
     dateUpdate: Date

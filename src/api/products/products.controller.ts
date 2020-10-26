@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Products } from './products.inteface';
 import { ProductService } from './products.service';
 
 @Controller('/products')
@@ -24,4 +25,15 @@ export class ProductController {
   async updateProducts(@Body() body ): Promise<any> {
     return await this.productService.updateProduct(body)
   }
+
+  @Delete('/:id')
+  async deleteProduct(@Param('id') id ): Promise<Products> {
+    return await this.productService.deleteProduct(id)
+  }
+
+  @Put('/:id/updateStock/:quantity')
+  async updateStock(@Param('id') id, @Param('quantity') quantity) : Promise<any> {
+    return this.productService.updateStock(id, quantity)
+  }
+
 }

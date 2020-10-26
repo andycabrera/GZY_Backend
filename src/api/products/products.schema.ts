@@ -4,18 +4,15 @@ export const ProductsSchema = new mongoose.Schema({
   name: String,
   type: String,
   detail:String,
-  options: [
-    {
-      color: String,
-      size: String,
-      base64: String
-    }
-  ],
+  color: String,
+  size: String,
+  base64: String,
   price: Number,
   status: {
     type: Boolean,
     default: 1
   },
+  stock: Number,
   dateCreate: {
     type: Date,
     default: new Date()
