@@ -10,7 +10,9 @@ export class PurchaseService{
         private readonly purchaseModel: Model<Purchase>
     ){}
 
-    async createPurchase(body): Promise<Purchase>{
+    async createPurchase(body: Purchase): Promise<Purchase>{
+        //Descontar Stock de un producto
+
         return await this.purchaseModel.create(body)
     }
 
@@ -18,7 +20,7 @@ export class PurchaseService{
         return await this.purchaseModel.find({}).populate('idUser').populate('products.product')
     }
 
-    async getPurchase(id): Promise<any>{
+    async getPurchase(id: String): Promise<any>{
         return await this.purchaseModel.find({_id: id}).populate('users')
     }
 }

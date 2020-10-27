@@ -33,12 +33,8 @@ export class ProductService {
   }
 
   async updateStock(id: String, quantity: Number): Promise<any> {
-    // return await this.productsModel.findOne({_id:id}, function(err, res){
-    //   // var stock = res.stock + quantity
-    //   var stock = 5;
-    //   return this.productsModel.findByIdAndUpdate(id, {stock: stock})
-    // })
-
-    return await this.productsModel.findByIdAndUpdate(id, {stock: quantity})
-  }
+    const prod = await this.productsModel.findOne({_id:id})
+    var stock = Number(prod.stock) + Number(quantity)
+    return await this.productsModel.findByIdAndUpdate(id, {stock: stock})
+    }
 }
