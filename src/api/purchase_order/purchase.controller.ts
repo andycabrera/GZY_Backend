@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ProductService } from '../products/products.service';
 import { PurchaseService } from './purchase.service';
 
@@ -9,10 +9,17 @@ export class PurchaseController{
 
     @Post()
     async newPurchase(@Body() body): Promise<any>{
-        body.products.forEach(element => {
-            this.productService.updateStock(element.product, (Number(-element.quantity)))
-        });
-        return await this.purchaseService.createPurchase(body)
+        try {
+            body.products.forEach(element => {
+                this.productService.updateStock(element.product, (Number(-element.quantity)))
+            });
+            
+            return await this.purchaseService.createPurchase(body)
+
+        } catch (error) {
+            throw new BadRequestException({error})
+        }
+        
     }
 
     @Get()

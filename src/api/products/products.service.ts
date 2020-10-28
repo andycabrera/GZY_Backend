@@ -33,10 +33,9 @@ export class ProductService {
   }
 
   async updateStock(id: String, quantity: Number): Promise<any> {
-    const prod = await this.productsModel.findOne({_id:id})
-    console.log(prod)
+    const prod = await this.productsModel.findById(id)
+    if(!prod) throw 'NO EXISTE EL PRODUCTO'
     const stock = Number(prod.stock) + Number(quantity)
-    console.log(prod.stock)
     prod.stock = stock 
     return await prod.save()
   }
