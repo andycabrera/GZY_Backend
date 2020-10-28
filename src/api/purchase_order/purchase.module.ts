@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common'
 import { DatabaseModule } from '../databases/database.module'
-import { PurchaseController } from './purchase.controller'
-import { PurchaseService } from './purchase.service'
-import { purchaseProvider } from './purchase.provider'
+import { productsProviders } from '../products/products.provider'
 import { ProductService } from '../products/products.service'
-import { ProductModule } from '../products/products.module'
+import { PurchaseController } from './purchase.controller'
+import { purchaseProvider } from './purchase.provider'
+import { PurchaseService } from './purchase.service'
 
 
 
 @Module({
-    imports: [DatabaseModule, ProductModule, ProductService],
+    imports: [DatabaseModule],
     controllers: [PurchaseController], 
-    providers: [PurchaseService, ...purchaseProvider],
+    providers: [PurchaseService, ProductService, ...purchaseProvider, ...productsProviders],
 })
 export class PurchaseModule {}
