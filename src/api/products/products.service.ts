@@ -27,14 +27,17 @@ export class ProductService {
   }
 
   async deleteProduct(id : String) : Promise<Products> {
-    return await this.productsModel.findByIdAndUpdate(id, { status : false}, function(err, res){
-      return res
-    })
+    const prod = await this.productsModel.findOne({_id:id})
+    prod.status = false
+    return await prod.save()
   }
 
   async updateStock(id: String, quantity: Number): Promise<any> {
     const prod = await this.productsModel.findOne({_id:id})
-    var stock = Number(prod.stock) + Number(quantity)
-    return await this.productsModel.findByIdAndUpdate(id, {stock: stock})
-    }
+    console.log(prod)
+    const stock = Number(prod.stock) + Number(quantity)
+    console.log(prod.stock)
+    prod.stock = stock 
+    return await prod.save()
+  }
 }

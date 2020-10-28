@@ -10,7 +10,7 @@ export const ProductsSchema = new mongoose.Schema({
   price: Number,
   status: {
     type: Boolean,
-    default: 1
+    default: true
   },
   stock: Number,
   dateCreate: {

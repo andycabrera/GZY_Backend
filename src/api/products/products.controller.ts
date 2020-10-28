@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { Products } from './products.inteface';
 import { ProductService } from './products.service';
 
@@ -13,7 +13,11 @@ export class ProductController {
 
   @Get('/:id')
   async getProduct(@Param('id') id): Promise<any> {
-    return await this.productService.getProduct(id);
+    try {
+      return await this.productService.getProduct(id);
+    } catch (error) {
+      throw new BadRequestException({error})
+    }
   }
 
   @Get()

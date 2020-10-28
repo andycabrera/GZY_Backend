@@ -9,11 +9,8 @@ export class PurchaseController{
 
     @Post()
     async newPurchase(@Body() body): Promise<any>{
-
-        //EN EL BODY TENGO UNA LISTA DE PRODUCTOS Y TENGO QUE DESCONTARLE 
-        //EL STOCK A CADA PRODUCTO
-        body.products.array.forEach(element => {
-            this.productService.updateStock(element.product, element.quantity)
+        body.products.forEach(element => {
+            this.productService.updateStock(element.product, (Number(-element.quantity)))
         });
         return await this.purchaseService.createPurchase(body)
     }
