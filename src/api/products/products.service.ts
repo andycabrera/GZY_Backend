@@ -18,8 +18,8 @@ export class ProductService {
     return await this.productsModel.findById(id)
   }
 
-  async getProducts(): Promise<Products[]> {
-    return await this.productsModel.find({});
+  async getProducts(filters): Promise<Products[]> {
+    return await this.productsModel.find(filters);
   }
 
   async updateProduct(body: Products): Promise<Products>{
@@ -34,10 +34,7 @@ export class ProductService {
 
   async updateStock(id: String, quantity: Number): Promise<any> {
     const prod = await this.productsModel.findOne({_id:id})
-    console.log(prod)
-    const stock = Number(prod.stock) + Number(quantity)
-    console.log(prod.stock)
-    prod.stock = stock 
+    prod.stock = Number(prod.stock) + Number(quantity)
     return await prod.save()
   }
 }

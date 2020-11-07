@@ -17,7 +17,7 @@ export interface Purchase extends Document{
     idUser: String,
     price: Number,
     address: Address,
-    status: Boolean,
+    status: String,
     dateCreate: Date,
     dateUpdate: Date
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { Products } from './products.inteface';
 import { ProductService } from './products.service';
 
@@ -21,8 +21,14 @@ export class ProductController {
   }
 
   @Get()
-  async getProducts(): Promise<any> {
-    return await this.productService.getProducts();
+  async getProducts(@Query('type') type: any): Promise<any> {
+    const filters = {
+      status: true,
+    }
+    if(type){
+      filters["type"] = type
+    }
+    return await this.productService.getProducts(filters);
   }
 
   @Put()

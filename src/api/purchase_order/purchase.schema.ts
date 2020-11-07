@@ -17,11 +17,18 @@ export const PurchaseSchema = new mongoose.Schema({
     },
     price: Number,
     address: {
-        address: String,
+        street: String,
+        number: String,
+        departament: String,
+        floor: String,
         city: String,
-        postalCode: Number
+        postalCode: String
     },
-    status: Boolean,
+    status: {
+        type: String,
+        enum: ["PENDIENTE","FINALIZADO"],
+        default: "PENDIENTE"
+    },
     dateCreate: {
         type: Date,
         default: new Date()
