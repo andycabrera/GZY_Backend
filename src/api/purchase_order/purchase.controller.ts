@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { identity } from 'rxjs';
 import { ProductService } from '../products/products.service';
 import { PurchaseService } from './purchase.service';
 
@@ -23,5 +24,10 @@ export class PurchaseController{
     @Get('/:id')
     async getPurchase(@Param('id') id): Promise<any>{
         return await this.purchaseService.getPurchase(id)
+    }
+
+    @Post('/change/:id')
+    async changeStatus(@Param('id') id: String,@Query('next') next: Boolean): Promise<any> {
+        return await this.purchaseService.changeStatus(id, next)
     }
 }

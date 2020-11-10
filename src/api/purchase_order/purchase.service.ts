@@ -25,12 +25,13 @@ export class PurchaseService{
         return await this.purchaseModel.find({_id: id}).populate('users').lean()
     }
 
-    async changeStatus(id: String, next: Boolean): Promise<any>{
-        const order = await this.purchaseModel.findOne(id).populate('users').lean()
+    async changeStatus(id: String, next: Boolean): Promise<Purchase>{
+        const order = await this.purchaseModel.findOne({_id:id})//.populate('users').lean()
         if(next){
-            order.status = states.find(x => x.name == order.status).next
+            order.status = `${states.find(x => x.name == order.status).next}`
         }else{
-            order.status = states.find(x => x.name == order.status).previus
+            order.status = `${states.find(x => x.name == order.status).previus}`
         }
+        return await order.save()
     }
 }

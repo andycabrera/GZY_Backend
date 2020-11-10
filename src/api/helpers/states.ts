@@ -2,11 +2,11 @@ export default [
     {
         name: "PENDIENTE",
         next: "FINALIZADO",
-        previus: null
+        previus: "PENDIENTE"
     },
     {
         name: "FINALIZADO",
-        next: null,
+        next: "FINALIZADO",
         previus: "PENDIENTE"
     }
 ]
